@@ -1,30 +1,36 @@
-import { Geist, Geist_Mono, Inter } from "next/font/google"
+import { Geist_Mono, Noto_Sans_KR } from 'next/font/google'
 
-import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils";
+import './globals.css'
+import { ThemeProvider } from '@/components/theme-provider'
+import { Providers } from './providers'
+import { cn } from '@/lib/utils'
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'})
+const notoSansKR = Noto_Sans_KR({
+    subsets: ['latin'],
+    variable: '--font-sans',
+})
 
 const fontMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
+    subsets: ['latin'],
+    variable: '--font-mono',
 })
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode
+    children: React.ReactNode
 }>) {
-  return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", inter.variable)}
-    >
-      <body>
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
-    </html>
-  )
+    return (
+        <html
+            lang="ko"
+            suppressHydrationWarning
+            className={cn('antialiased', fontMono.variable, notoSansKR.variable, 'font-sans')}
+        >
+            <body>
+                <ThemeProvider>
+                    <Providers>{children}</Providers>
+                </ThemeProvider>
+            </body>
+        </html>
+    )
 }
